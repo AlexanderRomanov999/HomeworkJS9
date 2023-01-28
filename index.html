@@ -1,0 +1,121 @@
+<!--
+Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
+стирать, код с решением задачи пишем под комментарием.
+-->
+
+<input id="from" type="text">
+В инпуте написано: <span></span>
+
+<br>
+
+<button class="messageBtn">Показать блок</button>
+<div class="message">
+Привет :)
+</div>
+
+<br>
+
+<form>
+<label>
+Первый инпут:
+<input class="form-control" type="text">
+</label>
+<br>
+<br>
+<label>
+Второй инпут:
+<select class="form-control">
+<option value=""></option>
+<option value="1">Один</option>
+<option value="2">Два</option>
+</select>
+</label>
+<br>
+<br>
+<button class = 'btn'>Отправить</button>
+<input class="element" type="'text">
+<h1>Заголовок</h1>
+
+<script>
+"use strict";
+
+/*
+1. При изменении значения в input с id="from", значение содержащееся в нем
+должно моментально отображаться в span. То есть при печати в input'е тег span
+также должен меняться.
+*/
+
+const input = document.getElementById('from');
+const string = document.querySelector('span');
+input.addEventListener('input', function(e){
+    string.textContent = input.value;
+});
+
+/*
+2. При клике на кнопку с классом messageBtn необходимо элементу с классом
+message:
+1) добавить два класса: animate_animated и animate_fadeInLeftBig
+2) поставить данному элементу стиль visibility в значение 'visible'.
+*/
+
+const button = document.querySelector('.messageBtn');
+const message = document.querySelector('.message');
+document.addEventListener('click', function(e) {
+    message.classList.add('animate_animated', 'animate_fadeInLeftBig');
+    message.style.visibility = 'visible';
+});
+
+/*
+3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
+форме. Если какое-либо поле не заполнено, форма не должна отправляться, также
+должны быть подсвечены незаполненные поля (необходимо поставить класс error
+незаполненным полям).
+Как только пользователь начинает заполнять какое-либо поле, необходимо,
+при вводе в данное поле, произвести проверку:
+Если поле пустое, необходимо данное поле подсветить (поставить класс error
+данному полю).
+Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
+*/
+
+const form = document.querySelector('from');
+const inputs = document.querySelectorAll('.form-control');
+const but = document.querySelector('.btn');
+
+but.addEventListener('click', function (e) {
+    inputs.forEach(el => {
+        if (el.value === '') {
+            el.classList.add('error');
+            el.style.border = 'solid red';
+            e.preventDefault();
+        } else {
+            el.classList.remove('error');
+            el.style.border = 'solid green';
+        }
+    });
+});
+
+inputs.forEach(el => {
+    el.addEventListener('focus', function (e) {
+        if (el.value === '') {
+            el.classList.add('error');
+            el.style.border = 'solid red';
+        } else {
+            el.classList.remove('error');
+            el.style.border = 'solid green';
+        }
+    });
+});
+
+/*Задание с семинара
+Создать поле ввода и под ним заголовок h1 с текстом “Заголовок”
+При вводе текста в поле ввода необходимо чтобы текст внутри заголовка менятся на введенный в поле ввода*/
+
+const el = document.querySelector('.element');
+const h1 = document.querySelector('h1');
+el.addEventListener('input', function (e) {
+    h1.textContent = el.value;
+});
+
+</script>
+</body>
+</html>
